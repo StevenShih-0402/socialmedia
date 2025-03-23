@@ -1,4 +1,4 @@
-package com.example.socialmedia.controller.rq;
+package com.example.socialmedia.controller.rq.user;
 
 import com.example.socialmedia.valid.phone.Phone;
 import jakarta.validation.constraints.NotBlank;

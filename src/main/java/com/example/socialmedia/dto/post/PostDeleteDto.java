@@ -1,4 +1,4 @@
-package com.example.socialmedia.dto;
+package com.example.socialmedia.dto.post;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,11 +9,6 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserRegisterDto {
+public class PostDeleteDto {
     private Integer id;
-    private String userName;
-    private String email;
-    private String password;
-    private String biography;
-    private String phone;
 }
