@@ -4,12 +4,14 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Data
 @Table(name = "POSTS")
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class PostEntity {
