@@ -1,5 +1,6 @@
 package com.example.socialmedia.controller;
 
+import com.example.socialmedia.controller.rq.UserLoginRq;
 import com.example.socialmedia.controller.rq.UserRegisterRq;
 import com.example.socialmedia.dto.UserRegisterDto;
 import com.example.socialmedia.enums.ResponseMessageEnum;
@@ -27,6 +28,32 @@ public class UserController {
                 .code(ResponseMessageEnum.SUCCESS.getResponse())
                 .message(ResponseMessageEnum.SUCCESS.toString())
                 .data(token)
+                .build()
+        );
+    }
+
+    // 使用者登入
+    @PostMapping(value = "/login")
+    public ResponseEntity<ResponseMessage<String>> login(@Valid @RequestBody UserLoginRq userLoginRq){
+        String token = userService.login(userLoginRq);
+
+        return ResponseEntity.ok(ResponseMessage.<String>builder()
+                .code(ResponseMessageEnum.SUCCESS.getResponse())
+                .message(ResponseMessageEnum.SUCCESS.toString())
+                .data(token)
+                .build()
+        );
+    }
+
+    // 使用者登出
+    @PostMapping(value = "/logout")
+    public ResponseEntity<ResponseMessage<String>> logout(){
+        userService.logout();
+
+        return ResponseEntity.ok(ResponseMessage.<String>builder()
+                .code(ResponseMessageEnum.SUCCESS.getResponse())
+                .message(ResponseMessageEnum.SUCCESS.toString())
+                .data("用戶已登出。")
                 .build()
         );
     }
