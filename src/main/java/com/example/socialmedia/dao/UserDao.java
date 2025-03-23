@@ -14,6 +14,14 @@ public class UserDao {
     private final UserRepository userRepository;
     private final TransferUtils transferUtils;
 
+    public UserEntity findUserByPhone(String phone){
+        return userRepository.findByPhone(phone);
+    }
+
+    public Boolean existsByPhone(String phone){
+        return userRepository.existsByPhone(phone);
+    }
+
     public UserEntity register(UserRegisterDto userRegisterDto){
         UserEntity userData = transferUtils.registerDtoToEntity(userRegisterDto);
         return userRepository.save(userData);
