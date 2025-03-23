@@ -2,6 +2,7 @@ package com.example.socialmedia.Utils;
 
 import com.example.socialmedia.exeption.JwtTokenException;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -48,7 +49,7 @@ public class JwtUtils {
 
         // Jwt 不存在或格式錯誤
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            throw new JwtTokenException("身分驗證錯誤：Token 不存在或格式錯誤。");
+            throw new JwtTokenException("Token 不存在或格式錯誤。");
         }
 
         return extractToken(authHeader);
@@ -60,15 +61,15 @@ public class JwtUtils {
             String token = extractTokenFromAuthHeader();
             // token 已經包含在黑名單
             if (blacklistedTokens.contains(token)) {
-                throw new JwtTokenException("身分驗證錯誤：不合法的 Token。");
+                throw new JwtTokenException("不合法的 Token。");
             }
 
             Jwts.parserBuilder()
                     .setSigningKey(secretKey)
                     .build()
                     .parseClaimsJws(token);
-        } catch (JwtTokenException | IllegalArgumentException e) {
-            throw new JwtTokenException("身分驗證錯誤：不合法的 Token。");
+        } catch (JwtException | IllegalArgumentException e) {
+            throw new JwtTokenException("不合法的 Token。");
         }
     }
 
@@ -88,5 +89,13 @@ public class JwtUtils {
     // 檢查 Token 是否在黑名單
     public boolean isBlacklisted(String token) {
         return blacklistedTokens.contains(extractToken(token));
+    }
+
+    public Integer getLoginUserId() {
+
+        String token = extractTokenFromAuthHeader();
+        Claims claims = getClaimsFromToken(token);
+
+        return claims.get("userId", Integer.class);
     }
 }

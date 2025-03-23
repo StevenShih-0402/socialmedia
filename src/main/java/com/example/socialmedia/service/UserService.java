@@ -1,13 +1,13 @@
 package com.example.socialmedia.service;
 
 import com.example.socialmedia.Utils.JwtUtils;
-import com.example.socialmedia.Utils.TransferUtils;
+import com.example.socialmedia.Utils.PasswordUtils;
 import com.example.socialmedia.Utils.ValidUtils;
-import com.example.socialmedia.controller.rq.UserLoginRq;
-import com.example.socialmedia.controller.rq.UserRegisterRq;
+import com.example.socialmedia.controller.rq.user.UserLoginRq;
+import com.example.socialmedia.controller.rq.user.UserRegisterRq;
 import com.example.socialmedia.dao.UserDao;
-import com.example.socialmedia.dto.UserLoginDto;
-import com.example.socialmedia.dto.UserRegisterDto;
+import com.example.socialmedia.dto.user.UserLoginDto;
+import com.example.socialmedia.dto.user.UserRegisterDto;
 import com.example.socialmedia.entity.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -20,10 +20,9 @@ public class UserService {
     private final UserDao userDao;
     private final JwtUtils jwtUtils;
     private final ValidUtils validUtils;
-    private final TransferUtils transferUtils;
 
     public String register(UserRegisterRq userRegisterRq){
-        UserRegisterDto userRegisterDto = transferUtils.registerRqToDto(userRegisterRq);
+        UserRegisterDto userRegisterDto = registerRqToDto(userRegisterRq);
 
         // 驗證電話是否已被註冊過
         validUtils.phoneIsExist(userRegisterDto.getPhone());
@@ -55,5 +54,18 @@ public class UserService {
 
         // 登出 = 將使用者這次帶的 Token 加入黑名單
         jwtUtils.blacklistToken(token);
+    }
+
+
+
+    public UserRegisterDto registerRqToDto(UserRegisterRq userRegisterRq){
+
+        return UserRegisterDto.builder()
+                .userName(userRegisterRq.getUserName())
+                .email(userRegisterRq.getEmail())
+                .password(PasswordUtils.hashPassword(userRegisterRq.getPassword()))
+                .biography(userRegisterRq.getBiography())
+                .phone(userRegisterRq.getPhone())
+                .build();
     }
 }

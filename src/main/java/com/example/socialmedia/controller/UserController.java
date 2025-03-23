@@ -1,8 +1,7 @@
 package com.example.socialmedia.controller;
 
-import com.example.socialmedia.controller.rq.UserLoginRq;
-import com.example.socialmedia.controller.rq.UserRegisterRq;
-import com.example.socialmedia.dto.UserRegisterDto;
+import com.example.socialmedia.controller.rq.user.UserLoginRq;
+import com.example.socialmedia.controller.rq.user.UserRegisterRq;
 import com.example.socialmedia.enums.ResponseMessageEnum;
 import com.example.socialmedia.response.ResponseMessage;
 import com.example.socialmedia.service.UserService;

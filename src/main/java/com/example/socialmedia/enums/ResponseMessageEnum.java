@@ -8,7 +8,8 @@ import lombok.Getter;
 public enum ResponseMessageEnum {
     SUCCESS("0"),
     AUTH_ERROR("1"),
-    INPUT_ERROR("2");
+    INPUT_ERROR("2"),
+    DATABASE_ERROR("3");
 
     private final String response;
 }
