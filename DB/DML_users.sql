@@ -1,0 +1,14 @@
+-- USERS DML
+
+-- INSERT
+INSERT INTO USERS (USER_ID, USER_NAME, EMAIL, PASSWORD, BIOGRAPHY)
+VALUES (1, 'Steven', 'steven@example.com', 'hashed_password_1', 'Software Developer');
+
+-- SELECT
+SELECT * FROM USERS WHERE USER_ID = 1;
+
+-- UPDATE
+UPDATE USERS SET BIOGRAPHY = 'Senior Software Developer' WHERE USER_ID = 1;
+
+-- DELETE
+DELETE FROM USERS WHERE USER_ID = 1;

@@ -1,0 +1,60 @@
+--------------------------------------------------------
+--  已建立檔案 - 星期日-3月-23-2025   
+--------------------------------------------------------
+--------------------------------------------------------
+--  DDL for Table POSTS
+--------------------------------------------------------
+
+  CREATE TABLE "TOM"."POSTS" 
+   (	"POST_ID" NUMBER, 
+	"USER_ID" NUMBER, 
+	"CONTENT" VARCHAR2(255 BYTE), 
+	"CREATED_AT" TIMESTAMP (6) DEFAULT CURRENT_TIMESTAMP
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index POST_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TOM"."POST_PK" ON "TOM"."POSTS" ("POST_ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Trigger TRG_POSTS_ID
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "TOM"."TRG_POSTS_ID" 
+BEFORE INSERT ON POSTS
+FOR EACH ROW
+BEGIN
+    IF :NEW.POST_ID IS NULL THEN
+        SELECT SEQ_POSTS.NEXTVAL INTO :NEW.POST_ID FROM DUAL;
+    END IF;
+END;
+/
+ALTER TRIGGER "TOM"."TRG_POSTS_ID" ENABLE;
+--------------------------------------------------------
+--  Constraints for Table POSTS
+--------------------------------------------------------
+
+  ALTER TABLE "TOM"."POSTS" MODIFY ("POST_ID" NOT NULL ENABLE);
+  ALTER TABLE "TOM"."POSTS" ADD CONSTRAINT "POST_PK" PRIMARY KEY ("POST_ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table POSTS
+--------------------------------------------------------
+
+  ALTER TABLE "TOM"."POSTS" ADD CONSTRAINT "FK_USER_POST" FOREIGN KEY ("USER_ID")
+	  REFERENCES "TOM"."USERS" ("USER_ID") ENABLE;
