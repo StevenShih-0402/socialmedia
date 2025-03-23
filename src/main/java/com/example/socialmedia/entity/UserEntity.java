@@ -4,10 +4,12 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Data
 @Table(name = "USERS")
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserEntity {
@@ -29,4 +31,7 @@ public class UserEntity {
 
     @Column(name = "BIOGRAPHY")
     private String biography;
+
+    @Column(name = "PHONE")
+    private String phone;
 }
