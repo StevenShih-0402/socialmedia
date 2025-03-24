@@ -15,6 +15,7 @@ import com.example.socialmedia.entity.PostEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -45,6 +46,7 @@ public class PostService {
         List<PostEntity> allPostData = postDao.queryAllPosts();
 
         return allPostData.stream()
+                .sorted(Comparator.comparing(PostEntity::getCreatedAt).reversed()) // 由最近到最遠
                 .map(this::postEntityToDto)  // .map(entity -> this.postEntityToDto(entity))
                 .toList();
     }
@@ -81,6 +83,7 @@ public class PostService {
     public PostDto postEntityToDto(PostEntity postEntity){
         return PostDto.builder()
                 .id(postEntity.getId())
+                .userId(postEntity.getUserId())
                 .userName(userDao.findUserById(postEntity.getUserId()).getUserName())
                 .content(postEntity.getContent())
                 .build();

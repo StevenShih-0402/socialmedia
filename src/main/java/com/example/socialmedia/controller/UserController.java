@@ -2,6 +2,7 @@ package com.example.socialmedia.controller;
 
 import com.example.socialmedia.controller.rq.user.UserLoginRq;
 import com.example.socialmedia.controller.rq.user.UserRegisterRq;
+import com.example.socialmedia.dto.user.UserRegisterDto;
 import com.example.socialmedia.enums.ResponseMessageEnum;
 import com.example.socialmedia.response.ResponseMessage;
 import com.example.socialmedia.service.UserService;
@@ -53,6 +54,19 @@ public class UserController {
                 .code(ResponseMessageEnum.SUCCESS.getResponse())
                 .message(ResponseMessageEnum.SUCCESS.toString())
                 .data(null)
+                .build()
+        );
+    }
+
+    // 查詢使用者個人資訊
+    @GetMapping(value = "/query")
+    public ResponseEntity<ResponseMessage<UserRegisterDto>> query(){
+        UserRegisterDto userData = userService.query();
+
+        return ResponseEntity.ok(ResponseMessage.<UserRegisterDto>builder()
+                .code(ResponseMessageEnum.SUCCESS.getResponse())
+                .message(ResponseMessageEnum.SUCCESS.toString())
+                .data(userData)
                 .build()
         );
     }
