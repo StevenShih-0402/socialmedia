@@ -56,6 +56,22 @@ public class UserService {
         jwtUtils.blacklistToken(token);
     }
 
+    public UserRegisterDto query(){
+        // 驗證使用者是否有帶合法的 Token
+        jwtUtils.validateToken();
+
+        UserEntity userData = userDao.findUserById(jwtUtils.getLoginUserId());
+
+        return UserRegisterDto.builder()
+                .id(userData.getId())
+                .userName(userData.getUserName())
+                .email(userData.getEmail())
+                .password("****")
+                .biography(userData.getBiography())
+                .phone(userData.getPhone())
+                .build();
+    }
+
 
 
     public UserRegisterDto registerRqToDto(UserRegisterRq userRegisterRq){

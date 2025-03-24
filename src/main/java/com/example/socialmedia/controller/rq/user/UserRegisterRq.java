@@ -31,5 +31,4 @@ public class UserRegisterRq {
     @NotBlank
     @Phone
     private String phone;
-
 }
