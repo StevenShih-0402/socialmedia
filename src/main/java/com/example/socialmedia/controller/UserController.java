@@ -52,7 +52,7 @@ public class UserController {
         return ResponseEntity.ok(ResponseMessage.<String>builder()
                 .code(ResponseMessageEnum.SUCCESS.getResponse())
                 .message(ResponseMessageEnum.SUCCESS.toString())
-                .data("用戶已登出。")
+                .data(null)
                 .build()
         );
     }
