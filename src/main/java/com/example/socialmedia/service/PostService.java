@@ -14,6 +14,7 @@ import com.example.socialmedia.dto.post.PostUpdateDto;
 import com.example.socialmedia.entity.PostEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Comparator;
 import java.util.List;
@@ -27,6 +28,7 @@ public class PostService {
     private final JwtUtils jwtUtils;
     private final ValidUtils validUtils;
 
+    @Transactional
     public PostDto create(PostCreateRq postCreateRq){
         // 驗證使用者是否有帶合法的 Token
         jwtUtils.validateToken();
