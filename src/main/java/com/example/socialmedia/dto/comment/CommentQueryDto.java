@@ -9,9 +9,6 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CommentDto {
-    private Integer id;
-    private String userName;
+public class CommentQueryDto {
     private Integer postId;
-    private String content;
 }

@@ -1,6 +1,7 @@
 package com.example.socialmedia.controller;
 
 import com.example.socialmedia.controller.rq.comment.CommentCreateRq;
+import com.example.socialmedia.controller.rq.comment.CommentQueryRq;
 import com.example.socialmedia.controller.rq.post.PostCreateRq;
 import com.example.socialmedia.dto.comment.CommentDto;
 import com.example.socialmedia.dto.post.PostDto;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -32,6 +35,19 @@ public class CommentController {
                 .code(ResponseMessageEnum.SUCCESS.getResponse())
                 .message(ResponseMessageEnum.SUCCESS.toString())
                 .data(newData)
+                .build()
+        );
+    }
+
+    // 查詢貼文所有留言
+    @PostMapping(value = "/query")
+    public ResponseEntity<ResponseMessage<List<CommentDto>>> queryByPostId(@Valid @RequestBody CommentQueryRq commentQueryRq){
+        List<CommentDto> allDatas = commentService.query(commentQueryRq);
+
+        return ResponseEntity.ok(ResponseMessage.<List<CommentDto>>builder()
+                .code(ResponseMessageEnum.SUCCESS.getResponse())
+                .message(ResponseMessageEnum.SUCCESS.toString())
+                .data(allDatas)
                 .build()
         );
     }
