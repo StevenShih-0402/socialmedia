@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PostCreateRq {
     @NotBlank
-    @Size(max = 255)
+    @Size(max = 2000)
     private String content;
 }

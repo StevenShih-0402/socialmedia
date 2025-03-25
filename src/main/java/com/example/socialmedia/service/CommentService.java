@@ -8,12 +8,11 @@ import com.example.socialmedia.dao.UserDao;
 import com.example.socialmedia.dto.comment.CommentCreateDto;
 import com.example.socialmedia.dto.comment.CommentDto;
 import com.example.socialmedia.dto.comment.CommentQueryDto;
-import com.example.socialmedia.dto.post.PostDto;
 import com.example.socialmedia.entity.CommentEntity;
-import com.example.socialmedia.entity.PostEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -56,6 +55,7 @@ public class CommentService {
         List<CommentEntity> allCommentData = commentDao.queryAllCommentsInPost(commentQueryDto);
 
         return allCommentData.stream()
+                .sorted(Comparator.comparing(CommentEntity::getId)) // 由最近到最遠
                 .map(this::commentEntityToDto)
                 .toList();
     }

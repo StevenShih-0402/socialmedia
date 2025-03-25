@@ -2,9 +2,7 @@ package com.example.socialmedia.controller;
 
 import com.example.socialmedia.controller.rq.comment.CommentCreateRq;
 import com.example.socialmedia.controller.rq.comment.CommentQueryRq;
-import com.example.socialmedia.controller.rq.post.PostCreateRq;
 import com.example.socialmedia.dto.comment.CommentDto;
-import com.example.socialmedia.dto.post.PostDto;
 import com.example.socialmedia.enums.ResponseMessageEnum;
 import com.example.socialmedia.response.ResponseMessage;
 import com.example.socialmedia.service.CommentService;
@@ -27,7 +25,7 @@ public class CommentController {
     private final CommentService commentService;
 
     // 發布留言
-    @PostMapping(value = "/create")
+    @PostMapping(value = "/create-comment")
     public ResponseEntity<ResponseMessage<CommentDto>> create(@Valid @RequestBody CommentCreateRq commentCreateRq){
         CommentDto newData = commentService.create(commentCreateRq);
 
@@ -40,7 +38,7 @@ public class CommentController {
     }
 
     // 查詢貼文所有留言
-    @PostMapping(value = "/query")
+    @PostMapping(value = "/query-comments")
     public ResponseEntity<ResponseMessage<List<CommentDto>>> queryByPostId(@Valid @RequestBody CommentQueryRq commentQueryRq){
         List<CommentDto> allDatas = commentService.query(commentQueryRq);
 
