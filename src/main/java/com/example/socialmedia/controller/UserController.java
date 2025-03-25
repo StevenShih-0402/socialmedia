@@ -59,7 +59,7 @@ public class UserController {
     }
 
     // 查詢使用者個人資訊
-    @GetMapping(value = "/query")
+    @GetMapping(value = "/query-user")
     public ResponseEntity<ResponseMessage<UserRegisterDto>> query(){
         UserRegisterDto userData = userService.query();
 

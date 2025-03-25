@@ -16,6 +16,6 @@ public class CommentCreateRq {
     private Integer postId;
 
     @NotBlank
-    @Size(max = 255)
+    @Size(max = 200)
     private String content;
 }
