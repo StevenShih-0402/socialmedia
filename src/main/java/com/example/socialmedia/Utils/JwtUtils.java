@@ -86,11 +86,6 @@ public class JwtUtils {
         blacklistedTokens.add(extractToken(token));
     }
 
-    // 檢查 Token 是否在黑名單
-    public boolean isBlacklisted(String token) {
-        return blacklistedTokens.contains(extractToken(token));
-    }
-
     public Integer getLoginUserId() {
 
         String token = extractTokenFromAuthHeader();

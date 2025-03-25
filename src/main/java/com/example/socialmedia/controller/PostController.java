@@ -23,7 +23,7 @@ public class PostController {
     private final PostService postService;
 
     // 發布文章
-    @PostMapping(value = "/create")
+    @PostMapping(value = "/create-post")
     public ResponseEntity<ResponseMessage<PostDto>> create(@Valid @RequestBody PostCreateRq postCreateRq){
         PostDto newData = postService.create(postCreateRq);
 
@@ -36,7 +36,7 @@ public class PostController {
     }
 
     // 查詢所有文章
-    @GetMapping(value = "/query")
+    @GetMapping(value = "/query-posts")
     public ResponseEntity<ResponseMessage<List<PostDto>>> query(){
         List<PostDto> allDatas = postService.query();
 
@@ -49,7 +49,7 @@ public class PostController {
     }
 
     // 編輯文章
-    @PutMapping(value = "/update")
+    @PutMapping(value = "/update-post")
     public ResponseEntity<ResponseMessage<PostDto>> update(@Valid @RequestBody PostUpdateRq postUpdateRq){
         PostDto updateData = postService.update(postUpdateRq);
 
@@ -62,7 +62,7 @@ public class PostController {
     }
 
     // 刪除文章
-    @DeleteMapping(value = "/delete")
+    @DeleteMapping(value = "/delete-post")
     public ResponseEntity<ResponseMessage<String>> delete(@Valid @RequestBody PostDeleteRq postDeleteRq){
         postService.delete(postDeleteRq);
 

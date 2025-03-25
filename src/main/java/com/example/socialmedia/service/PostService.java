@@ -48,7 +48,7 @@ public class PostService {
         List<PostEntity> allPostData = postDao.queryAllPosts();
 
         return allPostData.stream()
-                .sorted(Comparator.comparing(PostEntity::getCreatedAt).reversed()) // 由最近到最遠
+                .sorted(Comparator.comparing(PostEntity::getId).reversed()) // 由最近到最遠
                 .map(this::postEntityToDto)  // .map(entity -> this.postEntityToDto(entity))
                 .toList();
     }
