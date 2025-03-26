@@ -27,3 +27,5 @@ Note:
 8. 刪除貼文(`/api/post/delete-post`)：會連貼文內的留言一併刪除。
 9. 新增留言(`/api/comment/create-comment`)
 10. 查詢一篇貼文的所有留言(`/api/comment/query-comments`)
+
+![PostMan 測試檔案](https://drive.google.com/uc?export=download&id=1KBRUL9vdq2cnxV6Og4wrYUjTZnAXpCUF)
