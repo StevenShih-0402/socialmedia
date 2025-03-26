@@ -28,4 +28,4 @@ Note:
 9. 新增留言(`/api/comment/create-comment`)
 10. 查詢一篇貼文的所有留言(`/api/comment/query-comments`)
 
-![PostMan 測試檔案](https://drive.google.com/uc?export=download&id=1KBRUL9vdq2cnxV6Og4wrYUjTZnAXpCUF)
+[PostMan 測試檔案](https://drive.google.com/uc?export=download&id=1KBRUL9vdq2cnxV6Og4wrYUjTZnAXpCUF)
