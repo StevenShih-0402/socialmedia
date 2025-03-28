@@ -2,6 +2,7 @@ package com.example.socialmedia.controller;
 
 import com.example.socialmedia.controller.rq.post.PostCreateRq;
 import com.example.socialmedia.controller.rq.post.PostDeleteRq;
+import com.example.socialmedia.controller.rq.post.PostQueryRq;
 import com.example.socialmedia.controller.rq.post.PostUpdateRq;
 import com.example.socialmedia.dto.post.PostDto;
 import com.example.socialmedia.enums.ResponseMessageEnum;
@@ -36,9 +37,9 @@ public class PostController {
     }
 
     // 查詢所有文章
-    @GetMapping(value = "/query-posts")
-    public ResponseEntity<ResponseMessage<List<PostDto>>> query(){
-        List<PostDto> allDatas = postService.query();
+    @PostMapping(value = "/query-posts")
+    public ResponseEntity<ResponseMessage<List<PostDto>>> query(@Valid @RequestBody PostQueryRq postQueryRq){
+        List<PostDto> allDatas = postService.query(postQueryRq);
 
         return ResponseEntity.ok(ResponseMessage.<List<PostDto>>builder()
                 .code(ResponseMessageEnum.SUCCESS.getResponse())

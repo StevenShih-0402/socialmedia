@@ -29,4 +29,7 @@ public class PostEntity {
 
     @Column(name = "CREATED_AT", insertable = false, updatable = false)
     private LocalDateTime createdAt;
+
+    @Column(name = "UPDATED_AT", insertable = false)
+    private LocalDateTime updatedAt;
 }

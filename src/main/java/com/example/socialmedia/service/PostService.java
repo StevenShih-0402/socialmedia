@@ -4,13 +4,11 @@ import com.example.socialmedia.Utils.JwtUtils;
 import com.example.socialmedia.Utils.ValidUtils;
 import com.example.socialmedia.controller.rq.post.PostCreateRq;
 import com.example.socialmedia.controller.rq.post.PostDeleteRq;
+import com.example.socialmedia.controller.rq.post.PostQueryRq;
 import com.example.socialmedia.controller.rq.post.PostUpdateRq;
 import com.example.socialmedia.dao.PostDao;
 import com.example.socialmedia.dao.UserDao;
-import com.example.socialmedia.dto.post.PostCreateDto;
-import com.example.socialmedia.dto.post.PostDeleteDto;
-import com.example.socialmedia.dto.post.PostDto;
-import com.example.socialmedia.dto.post.PostUpdateDto;
+import com.example.socialmedia.dto.post.*;
 import com.example.socialmedia.entity.PostEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -41,14 +39,19 @@ public class PostService {
         return postEntityToDto(newData);
     }
 
-    public List<PostDto> query(){
+    public List<PostDto> query(PostQueryRq postQueryRq){
         // 驗證使用者是否有帶合法的 Token
         jwtUtils.validateToken();
 
-        List<PostEntity> allPostData = postDao.queryAllPosts();
+        PostQueryDto postQueryDto = PostQueryDto.builder()
+                .pageNo(postQueryRq.getPageNo())
+                .pageSize(postQueryRq.getPageSize())
+                .build();
+
+        List<PostEntity> allPostData = postDao.queryAllPosts(postQueryDto);
 
         return allPostData.stream()
-                .sorted(Comparator.comparing(PostEntity::getId).reversed()) // 由最近到最遠
+//                .sorted(Comparator.comparing(PostEntity::getId).reversed()) // 由最近到最遠
                 .map(this::postEntityToDto)  // .map(entity -> this.postEntityToDto(entity))
                 .toList();
     }
